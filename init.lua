@@ -67,6 +67,10 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", {})
+vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
+
+
 local config = require("nvim-treesitter.configs")
 config.setup({
 	ensure_installed = {"lua", "c", "cpp", "bash"},
