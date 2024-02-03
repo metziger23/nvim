@@ -20,4 +20,4 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 
-
+opt.signcolumn = "yes" -- show sign column so that text doesn't shift
