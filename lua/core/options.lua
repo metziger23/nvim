@@ -21,3 +21,6 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+
+-- turn off swapfile
+opt.swapfile = false
