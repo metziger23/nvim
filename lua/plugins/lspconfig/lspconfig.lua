@@ -57,6 +57,18 @@ return {
 
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+      opts.desc = "Format"
+      keymap.set("n", "<leader>cf", function ()
+        require('conform').format()
+      end, opts)
+
+      opts.desc = "Format selection"
+
+      keymap.set("v", "<leader>cF", function ()
+        require('conform').format()
+      end, opts)
+
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -69,6 +81,12 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
+
+    -- configure bashls server
+    lspconfig["bashls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
 
     -- configure clangd server
     lspconfig["clangd"].setup({
