@@ -80,7 +80,13 @@ end
     -- configure clangd server
     lspconfig["clangd"].setup({
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = function (client, bufnr)
+        on_attach(client, bufnr)
+        local clang_opts = { noremap = true, silent = true }
+        clang_opts.buffer = bufnr
+        clang_opts.desc = "Switch Source/Header (C/C++)"
+        vim.keymap.set("n", "<leader>s", "<cmd>ClangdSwitchSourceHeader<cr>", clang_opts)
+      end
     })
 
     -- configure lua server (with special settings)
