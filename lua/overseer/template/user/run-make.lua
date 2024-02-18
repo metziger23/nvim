@@ -3,7 +3,7 @@ return {
 	builder = function()
 		local make_utils = require("utils.make")
 		local make = make_utils.generate_make()
-        local cores = tostring(vim.fn.system("nproc"))
+        local cores = tostring(make_utils.get_number_of_cores())
 		return {
 			cmd = make,
 			args = {  "-j" .. cores },
