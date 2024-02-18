@@ -11,13 +11,13 @@ return {
 	},
 	builder = function(params)
 		-- Full path to current file (see :help expand())
+        local utils_qmake = require("utils.qmake")
 		local file = vim.fn.expand("%:p")
 
-		local debug = require("utils.qmake").generate_build_type_param(params.build_type)
+		local debug = utils_qmake.generate_build_type_param(params.build_type)
+        local spec = utils_qmake.generate_spec()
+		local qmake = utils_qmake.generate_qmake()
 
-        local spec = "macx-clang"
-
-		local qmake = "/Users/mgulyi/Qt/6.6.1/macos/bin/qmake"
 		return {
 			cmd = { qmake },
 			args = { "-spec", spec, debug },
