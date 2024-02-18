@@ -3,7 +3,7 @@ return {
 	opts = {},
 	config = function()
 		require("overseer").setup({
-			templates = { "builtin"},
+			templates = { "builtin", "user.run-qmake"},
 		})
 	end,
 }
