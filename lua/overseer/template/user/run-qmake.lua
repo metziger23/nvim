@@ -19,9 +19,7 @@ return {
 
 		local qmake = "/Users/mgulyi/Qt/6.6.1/macos/bin/qmake"
 		return {
-			-- cmd = { qmake },
-			cmd = qmake,
-			-- args = { file },
+			cmd = { qmake },
 			args = { "-spec", spec, debug },
 			components = { { "on_output_quickfix", open = true }, "default" },
 		}
