@@ -9,14 +9,18 @@ function M.generate_build_type_param(build_type)
 end
 
 function M.generate_spec()
-   if(vim.fn.has("mac")) then
+   if vim.fn.has("mac") == 1 then
         return "macx-clang"
+    elseif vim.fn.has("linux") == 1 then
+        return "linux-g++"
    end
 end
 
 function M.generate_qmake()
-   if(vim.fn.has("mac")) then
+   if vim.fn.has("mac") == 1 then
         return "/Users/mgulyi/Qt/6.6.1/macos/bin/qmake"
+    elseif vim.fn.has("linux") == 1 then
+        return "qmake"
    end
 end
 
