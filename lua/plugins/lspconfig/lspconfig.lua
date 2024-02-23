@@ -85,11 +85,24 @@ return {
 				vim.lsp.buf.signature_help()
 			end, opts)
 
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
 			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "]d", function() vim.diagnostic.goto_next({ severity = nil }) end, opts) -- jump to next diagnostic in buffer
+
+			opts.desc = "Go to previous diagnostic"
+			keymap.set("n", "[d", function() vim.diagnostic.goto_prev({ severity = nil }) end, opts) -- jump to previous diagnostic in buffer
+
+			opts.desc = "Go to next error"
+			keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity['ERROR'] }) end, opts) -- jump to next diagnostic in buffer
+
+			opts.desc = "Go to previous error"
+			keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity['ERROR'] }) end, opts) -- jump to previous diagnostic in buffer
+
+			opts.desc = "Go to next warning"
+			keymap.set("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity['WARN'] }) end, opts) -- jump to next diagnostic in buffer
+
+			opts.desc = "Go to previous warning"
+			keymap.set("n", "[w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity['WARN'] }) end, opts) -- jump to previous diagnostic in buffer
+
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
