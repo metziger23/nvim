@@ -52,6 +52,20 @@ return {
 				builtin.diagnostics({ bufnr = nil })
 			end, opts)
 
+			if client.supports_method("callHierarchy/incomingCalls") then
+				opts.desc = "Search incoming calls"
+				keymap.set("n", "<leader>sc", function()
+					builtin.lsp_incoming_calls()
+				end, opts)
+			end
+
+			if client.supports_method("callHierarchy/outgoingCalls") then
+				opts.desc = "Search outgoing calls"
+				keymap.set("n", "<leader>sC", function()
+					builtin.lsp_outgoing_calls()
+				end, opts)
+			end
+
 			opts.desc = "Smart rename"
 			keymap.set("n", "<leader>cr", function()
 				vim.lsp.buf.rename()
@@ -86,23 +100,34 @@ return {
 			end, opts)
 
 			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", function() vim.diagnostic.goto_next({ severity = nil }) end, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "]d", function()
+				vim.diagnostic.goto_next({ severity = nil })
+			end, opts) -- jump to next diagnostic in buffer
 
 			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", function() vim.diagnostic.goto_prev({ severity = nil }) end, opts) -- jump to previous diagnostic in buffer
+			keymap.set("n", "[d", function()
+				vim.diagnostic.goto_prev({ severity = nil })
+			end, opts) -- jump to previous diagnostic in buffer
 
 			opts.desc = "Go to next error"
-			keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity['ERROR'] }) end, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "]e", function()
+				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] })
+			end, opts) -- jump to next diagnostic in buffer
 
 			opts.desc = "Go to previous error"
-			keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity['ERROR'] }) end, opts) -- jump to previous diagnostic in buffer
+			keymap.set("n", "[e", function()
+				vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] })
+			end, opts) -- jump to previous diagnostic in buffer
 
 			opts.desc = "Go to next warning"
-			keymap.set("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity['WARN'] }) end, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "]w", function()
+				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARN"] })
+			end, opts) -- jump to next diagnostic in buffer
 
 			opts.desc = "Go to previous warning"
-			keymap.set("n", "[w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity['WARN'] }) end, opts) -- jump to previous diagnostic in buffer
-
+			keymap.set("n", "[w", function()
+				vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARN"] })
+			end, opts) -- jump to previous diagnostic in buffer
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
