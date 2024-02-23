@@ -13,6 +13,7 @@ return {
 						crust = "#000000",
 					},
 				},
+				floating_border = "on",
 			})
 			vim.cmd.colorscheme("catppuccin")
 		end,

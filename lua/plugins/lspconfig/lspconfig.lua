@@ -6,6 +6,17 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
+		-- Decorate floating windows
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+		vim.lsp.handlers["textDocument/signatureHelp"] =
+			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
+		vim.diagnostic.config({
+			float = { border = "rounded" },
+		})
+		require("lspconfig.ui.windows").default_options.border = "rounded"
+
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
@@ -17,11 +28,11 @@ return {
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
-            local builtin = require("telescope.builtin")
+			local builtin = require("telescope.builtin")
 
 			opts.desc = "Go to declaration"
 			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-            opts.desc = "Goto definition"
+			opts.desc = "Goto definition"
 			keymap.set("n", "gd", builtin.lsp_definitions, opts)
 			opts.desc = "Goto implementation"
 			keymap.set("n", "gI", builtin.lsp_implementations, opts)
@@ -33,28 +44,46 @@ return {
 			opts.desc = "Search symbols"
 			keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, opts)
 			opts.desc = "Search diagnostics"
-			keymap.set("n", "<leader>sd", function() builtin.diagnostics({ bufnr = 0 }) end, opts)
+			keymap.set("n", "<leader>sd", function()
+				builtin.diagnostics({ bufnr = 0 })
+			end, opts)
 			opts.desc = "Search diagnostics in all buffers"
-			keymap.set("n", "<leader>sD", function() builtin.diagnostics({ bufnr = nil }) end, opts)
+			keymap.set("n", "<leader>sD", function()
+				builtin.diagnostics({ bufnr = nil })
+			end, opts)
 
-            opts.desc = "Smart rename"
-			keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
-            opts.desc = "Code action"
-			keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-            opts.desc = "Source action"
-			keymap.set("n", "<leader>cA", function() vim.lsp.buf.code_action({ context = { only = { 'source' }, diagnostics = {} } }) end, opts)
-            opts.desc = "Format"
-			keymap.set("n", "<leader>cf", function() require('conform').format() end, opts)
-            opts.desc = "Format selection"
-			keymap.set("v", "<leader>cf", function() require('conform').format() end, opts)
+			opts.desc = "Smart rename"
+			keymap.set("n", "<leader>cr", function()
+				vim.lsp.buf.rename()
+			end, opts)
+			opts.desc = "Code action"
+			keymap.set("n", "<leader>ca", function()
+				vim.lsp.buf.code_action()
+			end, opts)
+			opts.desc = "Source action"
+			keymap.set("n", "<leader>cA", function()
+				vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
+			end, opts)
+			opts.desc = "Format"
+			keymap.set("n", "<leader>cf", function()
+				require("conform").format()
+			end, opts)
+			opts.desc = "Format selection"
+			keymap.set("v", "<leader>cf", function()
+				require("conform").format()
+			end, opts)
 
-
-            opts.desc = "Hover information"
-			keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-            opts.desc = "Signature help"
-			keymap.set("n", "gK", function() vim.lsp.buf.signature_help() end, opts)
-			keymap.set("i", "<c-k>", function() vim.lsp.buf.signature_help() end, opts)
-
+			opts.desc = "Hover information"
+			keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, opts)
+			opts.desc = "Signature help"
+			keymap.set("n", "gK", function()
+				vim.lsp.buf.signature_help()
+			end, opts)
+			keymap.set("i", "<c-k>", function()
+				vim.lsp.buf.signature_help()
+			end, opts)
 
 			opts.desc = "Go to previous diagnostic"
 			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
