@@ -24,16 +24,13 @@ return {
 
     telescope.load_extension("fzf")
 
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-    keymap.set("n", "<leader>fw", function() require("telescope.builtin").grep_string() end, { desc = "Find string under cursor in cwd" })
-    keymap.set("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = "Find git files" })
-    keymap.set("n", "<leader>f'", function() require("telescope.builtin").marks() end, { desc = "Find marks" })
-
-    keymap.set("n", "<leader>ls", function() require("telescope.builtin").lsp_document_symbols() end, { desc = "Search symbol in buffer" })
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find Files"})
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live Grep"})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Find Help Tags"})
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find Buffers"})
+    vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Find Old Files"})
+    vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = "Find String Under Cursor"})
+    vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Find Marks"})
   end,
 }

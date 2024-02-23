@@ -17,46 +17,50 @@ return {
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
-
-			-- set keybinds
-			opts.desc = "Show LSP references"
-			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+            local builtin = require("telescope.builtin")
 
 			opts.desc = "Go to declaration"
-			keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+            opts.desc = "Goto definition"
+			keymap.set("n", "gd", builtin.lsp_definitions, opts)
+			opts.desc = "Goto implementation"
+			keymap.set("n", "gI", builtin.lsp_implementations, opts)
+			opts.desc = "Goto type"
+			keymap.set("n", "gy", builtin.lsp_type_definitions, opts)
 
-			opts.desc = "Show LSP definitions"
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+			opts.desc = "Search references"
+			keymap.set("n", "<leader>sr", builtin.lsp_references, opts)
+			opts.desc = "Search symbols"
+			keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, opts)
+			opts.desc = "Search diagnostics"
+			keymap.set("n", "<leader>sd", function() builtin.diagnostics({ bufnr = 0 }) end, opts)
+			opts.desc = "Search diagnostics in all buffers"
+			keymap.set("n", "<leader>sD", function() builtin.diagnostics({ bufnr = nil }) end, opts)
 
-			opts.desc = "Show LSP implementations"
-			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+            opts.desc = "Smart rename"
+			keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
+            opts.desc = "Code action"
+			keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+            opts.desc = "Source action"
+			keymap.set("n", "<leader>cA", function() vim.lsp.buf.code_action({ context = { only = { 'source' }, diagnostics = {} } }) end, opts)
+            opts.desc = "Format"
+			keymap.set("n", "<leader>cf", function() require('conform').format() end, opts)
+            opts.desc = "Format selection"
+			keymap.set("v", "<leader>cf", function() require('conform').format() end, opts)
 
-			opts.desc = "Show LSP type definitions"
-			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
-			opts.desc = "See available code actions"
-			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+            opts.desc = "Hover information"
+			keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+            opts.desc = "Signature help"
+			keymap.set("n", "gK", function() vim.lsp.buf.signature_help() end, opts)
+			keymap.set("i", "<c-k>", function() vim.lsp.buf.signature_help() end, opts)
 
-			opts.desc = "Smart rename"
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-
-			opts.desc = "Show buffer diagnostics"
-			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-
-			opts.desc = "Show line diagnostics"
-			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 			opts.desc = "Go to previous diagnostic"
 			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 
 			opts.desc = "Go to next diagnostic"
 			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
@@ -84,7 +88,7 @@ return {
 				local clang_opts = { noremap = true, silent = true }
 				clang_opts.buffer = bufnr
 				clang_opts.desc = "Switch Source/Header (C/C++)"
-				vim.keymap.set("n", "<leader>s", "<cmd>ClangdSwitchSourceHeader<cr>", clang_opts)
+				vim.keymap.set("n", "gs", "<cmd>ClangdSwitchSourceHeader<cr>", clang_opts)
 			end,
 		})
 
