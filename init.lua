@@ -1,7 +1,10 @@
 require "user.launch"
 require "user.options"
 require "user.keymaps"
+require "user.autocmds"
 spec "user.colorscheme"
-
+spec "user.treesitter"
+spec "user.telescope"
+spec "user.nvim-tree"
 
 require "user.lazy"
