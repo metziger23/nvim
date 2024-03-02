@@ -17,5 +17,6 @@ keymap("v", ">", ">gv", opts)
 keymap("x", "p", [["_dP]])
 
 -- more good
-keymap({ "n", "o", "x" }, "<s-h>", "^", opts)
-keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
+keymap({ "n", "o", "x" }, "<S-h>", "^", opts)
+keymap({ "n", "o", "x" }, "<S-l>", "g_", opts)
+

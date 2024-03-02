@@ -6,5 +6,6 @@ spec "user.colorscheme"
 spec "user.treesitter"
 spec "user.telescope"
 spec "user.nvim-tree"
+spec "user.nvim-tmux-navigation"
 
 require "user.lazy"
