@@ -1,17 +1,17 @@
--- [[ Highlight on yank ]]
-local setup_highlight_on_yank = function()
-  -- See `:help vim.highlight.on_yank()`
-  local highlight_group = vim.api.nvim_create_augroup(
-    "YankHighlight",
-    { clear = true }
-  )
-  vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-      vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = "*",
-  })
-end
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function()
+		vim.cmd("set formatoptions-=cro")
+	end,
+})
 
-setup_highlight_on_yank()
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  callback = function()
+    vim.cmd "tabdo wincmd ="
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "Visual" })
+	end,
+})
