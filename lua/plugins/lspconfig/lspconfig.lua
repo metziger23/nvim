@@ -39,51 +39,53 @@ return {
 			opts.desc = "Goto type"
 			keymap.set("n", "gy", builtin.lsp_type_definitions, opts)
 
-			opts.desc = "Search references"
-			keymap.set("n", "<leader>sr", builtin.lsp_references, opts)
-			opts.desc = "Search symbols"
-			keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, opts)
-			opts.desc = "Search diagnostics"
-			keymap.set("n", "<leader>sd", function()
+			opts.desc = "Goto References"
+			keymap.set("n", "gr", builtin.lsp_references, opts)
+			opts.desc = "Lsp Document Symbols"
+			keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, opts)
+			opts.desc = "Lsp Workspace Symbols"
+			keymap.set("n", "<leader>lS", builtin.lsp_dynamic_workspace_symbols, opts)
+			opts.desc = "Lsp diagnostics"
+			keymap.set("n", "<leader>ld", function()
 				builtin.diagnostics({ bufnr = 0 })
 			end, opts)
-			opts.desc = "Search diagnostics in all buffers"
-			keymap.set("n", "<leader>sD", function()
+			opts.desc = "Lsp diagnostics in all buffers"
+			keymap.set("n", "<leader>lD", function()
 				builtin.diagnostics({ bufnr = nil })
 			end, opts)
 
 			if client.supports_method("callHierarchy/incomingCalls") then
-				opts.desc = "Search incoming calls"
-				keymap.set("n", "<leader>sc", function()
+				opts.desc = "Lsp incoming calls"
+				keymap.set("n", "<leader>lc", function()
 					builtin.lsp_incoming_calls()
 				end, opts)
 			end
 
 			if client.supports_method("callHierarchy/outgoingCalls") then
-				opts.desc = "Search outgoing calls"
-				keymap.set("n", "<leader>sC", function()
+				opts.desc = "Lsp outgoing calls"
+				keymap.set("n", "<leader>lC", function()
 					builtin.lsp_outgoing_calls()
 				end, opts)
 			end
 
-			opts.desc = "Smart rename"
-			keymap.set("n", "<leader>cr", function()
+			opts.desc = "Lsp rename"
+			keymap.set("n", "<leader>lr", function()
 				vim.lsp.buf.rename()
 			end, opts)
-			opts.desc = "Code action"
-			keymap.set("n", "<leader>ca", function()
+			opts.desc = "Lsp Code action"
+			keymap.set("n", "<leader>la", function()
 				vim.lsp.buf.code_action()
 			end, opts)
-			opts.desc = "Source action"
-			keymap.set("n", "<leader>cA", function()
+			opts.desc = "Lsp Source action"
+			keymap.set("n", "<leader>lA", function()
 				vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
 			end, opts)
 			opts.desc = "Format"
-			keymap.set("n", "<leader>cf", function()
+			keymap.set("n", "<leader>lf", function()
 				require("conform").format()
 			end, opts)
 			opts.desc = "Format selection"
-			keymap.set("v", "<leader>cf", function()
+			keymap.set("v", "<leader>lf", function()
 				require("conform").format()
 			end, opts)
 
