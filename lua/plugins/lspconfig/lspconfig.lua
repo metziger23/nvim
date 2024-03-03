@@ -38,9 +38,11 @@ return {
 			keymap.set("n", "gI", builtin.lsp_implementations, opts)
 			opts.desc = "Goto type"
 			keymap.set("n", "gy", builtin.lsp_type_definitions, opts)
-
 			opts.desc = "Goto References"
 			keymap.set("n", "gr", builtin.lsp_references, opts)
+			opts.desc = "Goto Line diagnostics"
+			keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+
 			opts.desc = "Lsp Document Symbols"
 			keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, opts)
 			opts.desc = "Lsp Workspace Symbols"
