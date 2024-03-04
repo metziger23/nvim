@@ -43,5 +43,3 @@ opt.scrolloff = 8
 
 opt.cursorline = true
 
-opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-
