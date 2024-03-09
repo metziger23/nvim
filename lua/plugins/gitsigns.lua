@@ -37,7 +37,7 @@ local function on_attach(buffer)
 	map("n", "<leader>td", require("gitsigns").toggle_deleted, { desc = "Toggle Git deleted" })
 
 	-- text object
-	map({ "o", "x" }, "ih", "<cmd><c-u>Gitsigns select_hunk<cr>", { desc = "Select Git hunk" })
+	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Git hunk" })
 
 	-- telescope git pickers
 	map("n", "<leader>gc", function()
