@@ -58,6 +58,9 @@ local function on_attach(buffer)
 	map("n", "<leader>gS", function()
 		require("telescope.builtin").git_stash()
 	end, { desc = "Git stash" })
+	map("n", "<leader>gf", function()
+		require("telescope.builtin").git_files()
+	end, { desc = "Git files" })
 
 	-- which-key
 	local mappings = {
