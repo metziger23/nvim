@@ -43,4 +43,6 @@ opt.scrolloff = 8
 
 opt.cursorline = true
 
-vim.opt.shortmess:append({ I = true })
+opt.shortmess:append({ I = true })
+
+opt.pumheight = 10
