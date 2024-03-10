@@ -42,3 +42,5 @@ opt.swapfile = false
 opt.scrolloff = 8
 
 opt.cursorline = true
+
+vim.opt.shortmess:append({ I = true })
