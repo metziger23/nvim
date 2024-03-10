@@ -7,6 +7,9 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				floating_border = "on",
+				integrations = {
+					noice = true,
+				},
 			})
 			vim.cmd.colorscheme("catppuccin")
 		end,
