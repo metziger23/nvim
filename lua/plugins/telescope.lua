@@ -37,7 +37,7 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
-		vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Find String Under Cursor" })
+		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word Under Cursor" })
 		vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Find Marks" })
 
 		local opts = { noremap = true }
