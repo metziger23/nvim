@@ -153,6 +153,13 @@ return {
 
 		-- configure clangd server
 		lspconfig["clangd"].setup({
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--pch-storage=memory",
+        "--function-arg-placeholders",
+      },
 			capabilities = capabilities,
 			on_attach = function(client, bufnr)
 				on_attach(client, bufnr)
