@@ -46,3 +46,6 @@ opt.cursorline = true
 opt.shortmess:append({ I = true })
 
 opt.pumheight = 10
+
+opt.showmode = false
+
