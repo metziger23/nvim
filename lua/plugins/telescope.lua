@@ -24,6 +24,7 @@ return {
 			extensions = {
 				file_browser = {
 					hijack_netrw = true, -- disables netrw and use telescope-file-browser in its place
+          cwd_to_path = true
 				},
 			},
 		})
