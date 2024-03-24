@@ -18,7 +18,7 @@ end
 
 function M.generate_qmake()
 	if vim.fn.has("mac") == 1 then
-		return "/Users/mgulyi/Qt/6.6.1/macos/bin/qmake"
+		return "/opt/homebrew/Cellar/qt/6.6.2_1/bin/qmake"
 	elseif vim.fn.has("linux") == 1 then
 		return "qmake"
 	end
