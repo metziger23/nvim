@@ -43,6 +43,8 @@ return {
 			opts.desc = "Goto Line diagnostics"
 			keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 
+			opts.desc = "Lsp Implementations"
+			keymap.set("n", "<leader>li", builtin.lsp_implementations, opts)
 			opts.desc = "Lsp Document Symbols"
 			keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, opts)
 			opts.desc = "Lsp Workspace Symbols"
